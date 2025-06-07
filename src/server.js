@@ -24,7 +24,7 @@ export const setupServer = () => {
     });
   });
 
-  app.get('/students/studentId', async (req, res) => {
+  app.get('/students/:studentId', async (req, res) => {
     const { studentId } = req.params;
     const student = await GetStudentById(studentId);
     if (!student) {
