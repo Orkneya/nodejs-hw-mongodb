@@ -36,6 +36,7 @@
     "is-number": "^7.0.0",
     "json-buffer": "^3.0.1",
     "locate-path": "^6.0.0",
+    "mongodb": "^6.17.0",
     "mongoose": "^8.15.1",
     "normalize-path": "^3.0.0",
     "parent-module": "^1.0.1",

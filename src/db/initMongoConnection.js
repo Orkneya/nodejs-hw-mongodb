@@ -10,14 +10,6 @@ export const initMongoConnection = async () => {
     await mongoose.connect(
       `mongodb+srv://${user}:${pwd}@${url}/${db}?retryWrites=true&w=majority&appName=Cluster0`,
     );
-    // console.log('Подключаемся к MongoDB со следующими данными:');
-    // console.log({
-    //   user,
-    //   pwd,
-    //   url,
-    //   db,
-    //   fullConnectionString: `mongodb+srv://${user}:${pwd}@${url}/${db}?retryWrites=true&w=majority&appName=Cluster0`,
-    // });
     console.log('Mongo connection successfully established!');
   } catch (err) {
     console.log('Error while setting up mongo connection', err);
