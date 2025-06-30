@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 
 export const createContactsSchema = Joi.object({
   name: Joi.string().min(3).max(30).required(),
@@ -7,14 +7,14 @@ export const createContactsSchema = Joi.object({
   email: Joi.string().min(3).max(30).allow(null),
   isFavourite: Joi.boolean(),
   contactType: Joi.string().min(3).max(30).required(),
-  userId: Joi.string()
-    .required()
-    .custom((value, helper) => {
-      if (value && !mongoose.isValidObjectId(value)) {
-        return helper.message('Parent id should be a valid mongo id');
-      }
-      return value;
-    }),
+  // userId: Joi.string()
+  //   .required()
+  //   .custom((value, helper) => {
+  //     if (value && !mongoose.isValidObjectId(value)) {
+  //       return helper.message('Parent id should be a valid mongo id');
+  //     }
+  //     return value;
+  //   }),
 });
 
 export const updateContactsSchema = Joi.object({
@@ -23,5 +23,5 @@ export const updateContactsSchema = Joi.object({
   email: Joi.string().min(3).max(30).allow(null),
   isFavourite: Joi.boolean(),
   contactType: Joi.string().min(3).max(30),
-  userId: Joi.string(),
+  // userId: Joi.string(),
 });
