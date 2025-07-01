@@ -4,7 +4,6 @@ import { UsersCollection } from '../db/models/user.js';
 import createHttpError from 'http-errors';
 import { SessionCollection } from '../db/models/session.js';
 import { FIFTEEN_MINUTES, ONE_DAY } from '../constants/index.js';
-import mongoose from 'mongoose';
 
 export const registerUser = async (payload) => {
   const user = await UsersCollection.findOne({
@@ -50,9 +49,6 @@ const createSession = () => {
   };
 };
 export const refreshUserSession = async ({ sessionId, refreshToken }) => {
-  if (!mongoose.Types.ObjectId.isValid(sessionId)) {
-    throw createHttpError(400, 'Invalid session ID');
-  }
   const session = await SessionCollection.findOne({
     _id: sessionId,
     refreshToken,
