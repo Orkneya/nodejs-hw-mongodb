@@ -7,10 +7,10 @@ export const checkUser = async (req, res, next) => {
     next(createHttpError(401));
     return;
   }
+
   const { contactId } = req.params;
   if (!contactId) {
-    next(createHttpError(403));
-    return;
+    return next(createHttpError(400, 'Missing contactId param'));
   }
 
   const contact = await ContactsCollection.findOne({
@@ -18,10 +18,8 @@ export const checkUser = async (req, res, next) => {
     userId: user._id,
   });
 
-  if (contact) {
-    next();
-    return;
+  if (!contact) {
+    return next(createHttpError(404, 'Contact not found'));
   }
-
-  next(createHttpError(403));
+  next();
 };
