@@ -11,6 +11,9 @@ import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
 import { parseFilter } from '../utils/parseFilterParams.js';
 import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
+import { getEnvVar } from '../utils/getEnvVar.js';
+import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
+import { getPhotoUrlFromFile } from '../utils/getPhotoUrlFromFile.js';
 
 export const getContactsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
@@ -48,10 +51,11 @@ export const getContactByIdController = async (req, res) => {
 };
 
 export const createContactController = async (req, res) => {
+  const photoUrl = await getPhotoUrlFromFile(req.file);
   const contactData = {
     ...req.body,
     userId: req.user._id,
-    photo: req.file?.path || null,
+    photo: photoUrl,
   };
 
   const contact = await createContact(contactData);
@@ -65,19 +69,14 @@ export const createContactController = async (req, res) => {
 
 export const patchContactController = async (req, res) => {
   const { contactId } = req.params;
-  const photo = req.file;
-
-  let photoUrl;
-
-  if (photo) {
-    photoUrl = await saveFileToUploadDir(photo);
-  }
+  const photoUrl = await getPhotoUrlFromFile(req.file);
 
   const result = await updateContact(
     contactId,
     {
       ...req.body,
-      photo: photoUrl,
+      ...(photoUrl && { photo: photoUrl }),
+      // photo: photoUrl,
     },
     req.user._id,
   );
