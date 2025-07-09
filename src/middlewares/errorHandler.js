@@ -17,7 +17,5 @@ export const errorHandler = (err, req, res, next) => {
       message: err.message,
       stack: err.stack,
     },
-    // data: {},
-    // data: err.message,
   });
 };
