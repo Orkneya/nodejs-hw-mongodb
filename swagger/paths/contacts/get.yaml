@@ -33,7 +33,6 @@ parameters:
       enum: [asc, desc]
       example: asc
     description: Sorting order (ascending or descending)
-
   - in: query
     name: contactType
     schema:

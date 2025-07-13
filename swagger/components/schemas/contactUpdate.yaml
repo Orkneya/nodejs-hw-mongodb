@@ -4,6 +4,10 @@ properties:
     description: "Contact's name"
     type: string
     example: 'John Doe'
+  email:
+    description: "Contact's email"
+    type: string
+    example: 'helloJohn@example.com'
   phoneNumber:
     description: "Contact's phone number"
     type: number
@@ -19,5 +23,6 @@ properties:
   photo:
     description: "Link to contact's photo"
     type: string
+    format: binary
     example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
 required: []

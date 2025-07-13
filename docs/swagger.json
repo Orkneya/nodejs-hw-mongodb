@@ -202,14 +202,18 @@
                   "name",
                   "phoneNumber",
                   "isFavourite",
-                  "contactType",
-                  "userId"
+                  "contactType"
                 ],
                 "properties": {
                   "name": {
                     "description": "Contact's name",
                     "type": "string",
                     "example": "John Doe"
+                  },
+                  "email": {
+                    "description": "Contact's email",
+                    "type": "string",
+                    "example": "helloJohn@example.com"
                   },
                   "phoneNumber": {
                     "description": "Contact's phoneNumber",
@@ -229,16 +233,6 @@
                       "home",
                       "personal"
                     ]
-                  },
-                  "avgMark": {
-                    "description": "Contact's average mark. Should be between 1 and 12",
-                    "type": "number",
-                    "example": 9.7
-                  },
-                  "userId": {
-                    "description": "Contact's user id",
-                    "type": "string",
-                    "example": "65e4decdd286b30065d54af9"
                   },
                   "photo": {
                     "description": "Contact's photo",
@@ -406,7 +400,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "$ref": "#/components/schemas/contactUpdate"
               }
@@ -485,6 +479,11 @@
             "type": "string",
             "example": "John Doe"
           },
+          "email": {
+            "description": "Contact's email",
+            "type": "string",
+            "example": "helloJohn@example.com"
+          },
           "phoneNumber": {
             "description": "Contact's phoneNumber",
             "type": "number",
@@ -524,6 +523,11 @@
             "type": "string",
             "example": "John Doe"
           },
+          "email": {
+            "description": "Contact's email",
+            "type": "string",
+            "example": "helloJohn@example.com"
+          },
           "phoneNumber": {
             "description": "Contact's phone number",
             "type": "number",
@@ -546,6 +550,7 @@
           "photo": {
             "description": "Link to contact's photo",
             "type": "string",
+            "format": "binary",
             "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
           }
         },
